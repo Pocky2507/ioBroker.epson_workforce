@@ -1,10 +1,10 @@
 ![Logo](../../admin/epson_stylus_px830.png)
-# ioBroker.epson_stylus_px830
+# ioBroker.epson_workforce
 
 ## Beschreibung
-Dieser Adapter liest den Zustand der Tintenpatronen eines Epson Stylus Photo PX830 von des Webseite ein
+Dieser Adapter liest den Zustand der Tintenpatronen eines Epson Workforce Druckers von der Webseite ein
 
-![alt text](img/printer_website.png "Website of EPSON Stylus Photo PX830")
+![alt text](img/printer_website.png "Website of EPSON Workforce Printer")
 
 ## Einstellungen
 ### IP / Port
@@ -21,25 +21,25 @@ Der Adapter startet chronologisch wie in den Einstellungen angegeben.
 
 ##  Datenpunkte
 
-epson_stylus_px830.0.__UNREACH__ (*boolean*)
+epson_workforce.0.__UNREACH__ (*boolean*)
 
-epson_stylus_px830.0.__connect__ (*string*) type of connection (WLAN,Eth)
+epson_workforce.0.__connect__ (*string*) type of connection (WLAN,Eth)
 
-epson_stylus_px830.0.__name__  (*string*)
+epson_workforce.0.__name__  (*string*)
 
-epson_stylus_px830.0.__model__ (*string*)
+epson_workforce.0.__model__ (*string*)
 
-epson_stylus_px830.0.__mac__ (*string*)
+epson_workforce.0.__mac__ (*string*)
 
-epson_stylus_px830.0.__IP__(*string*)
+epson_workforce.0.__IP__(*string*)
 
-epson_stylus_px830.0.__inks__ (*channel*)
+epson_workforce.0.__inks__ (*channel*)
 
 Für jede Druckfarbe:
 
-epson_stylus_px830.0.__inks.color.level__ (*number 0-100%*)
+epson_workforce.0.__inks.color.level__ (*number 0-100%*)
 
-epson_stylus_px830.0.__inks.color.cartridge__ (*string*) -> Epson Produktname für die Tinte
+epson_workforce.0.__inks.color.cartridge__ (*string*) -> Epson Produktname für die Tinte
 
 ## VIS
 ### Widget
