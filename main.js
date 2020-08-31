@@ -82,7 +82,7 @@ function readSettings() {
     else { // ip entered
         ip = (adapter.config.printerport.length > 0) ? adapter.config.printerip + ':' + adapter.config.printerport : adapter.config.printerip; // if port is set then ip+port else ip only
         adapter.log.debug('IP: ' + ip);
-        link = 'https://' + ip + '/PRESENTATION/HTML/TOP/PRTINFO.HTML';
+        link = 'http://' + ip + '/PRESENTATION/HTML/TOP/PRTINFO.HTML';
     
         //check if sync time is entered in settings
         sync = (!adapter.config.synctime) ? 180 : parseInt(adapter.config.synctime,10);
