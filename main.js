@@ -13,7 +13,7 @@ var link = '';
 var sync = 180;
 
 var adapter = utils.Adapter({
-    name: 'epson_stylus_px830',
+    name: 'epson_workforce',
     systemConfig: true,
     useFormatDate: true,
     /*stateChange: function(id, state) {
@@ -43,38 +43,32 @@ var ink = {
     'cyan' : {
         'state': 'cyan',
         'name': 'Cyan',
-        'cut':  'IMAGE/Ink_C.PNG" height=',
+        'cut':  'IMAGE/Ink_C.PNG\' height=',
         'cartridge': 'T0802'    
-    },
-    'cyanlight' : {
-        'state': 'cyanlight',
-        'name': 'Cyan Light',
-        'cut':  'IMAGE/Ink_LC.PNG" height=',
-        'cartridge': 'T0805'    
     },
     'yellow' : {
         'state': 'yellow',
         'name': 'Yellow',
-        'cut':  'IMAGE/Ink_Y.PNG" height=',
+        'cut':  'IMAGE/Ink_Y.PNG\' height=',
         'cartridge': 'T0804'    
     },
     'black' : {
         'state': 'black',
         'name': 'Black',
-        'cut':  'IMAGE/Ink_K.PNG" height=',
-        'cartridge': 'T0801'    
+        'cut':  'IMAGE/Ink_K.PNG\' height=',
+        'cartridge': 'Black27'    
     },
     'magenta' : {
         'state': 'magenta',
         'name': 'Magenta',
-        'cut':  'IMAGE/Ink_M.PNG" height=',
+        'cut':  'IMAGE/Ink_M.PNG\' height=',
         'cartridge': 'T0803'    
     },
-    'magentalight' : {
-        'state': 'magentalight',
-        'name': 'Magenta Light',
-        'cut':  'IMAGE/Ink_LM.PNG" height=',
-        'cartridge': 'T0806'    
+    'waste' : {
+        'state': 'waste',
+        'name': 'Waste',
+        'cut':  'IMAGE/Ink_Waste.PNG\' height=',
+        'cartridge': 'Waste'    
     }
 };
 
@@ -88,7 +82,7 @@ function readSettings() {
     else { // ip entered
         ip = (adapter.config.printerport.length > 0) ? adapter.config.printerip + ':' + adapter.config.printerport : adapter.config.printerip; // if port is set then ip+port else ip only
         adapter.log.debug('IP: ' + ip);
-        link = 'http://' + ip + '/PRESENTATION/HTML/TOP/PRTINFO.HTML';
+        link = 'https://' + ip + '/PRESENTATION/HTML/TOP/PRTINFO.HTML';
     
         //check if sync time is entered in settings
         sync = (!adapter.config.synctime) ? 180 : parseInt(adapter.config.synctime,10);
