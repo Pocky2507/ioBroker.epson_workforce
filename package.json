@@ -1,15 +1,15 @@
 {
-  "name": "iobroker.epson_stylus_px830",
-  "description": "Ink status of Epson Stylus PX830",
-  "version": "0.2.1",
-  "author": "pix",
+  "name": "iobroker.epson_workforce",
+  "description": "Ink status of Epson Workforce printers",
+  "version": "0.0.1",
+  "author": "rrov1",
   "contributors": [
     "pix"
   ],
-  "homepage": "https://github.com/Pix---/ioBroker.epson_stylus_px830",
+  "homepage": "https://github.com/rrov1/ioBroker.epson_workforce",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pix---/ioBroker.epson_stylus_px830"
+    "url": "https://github.com/rrov1/ioBroker.epson_workforce"
   },
   "license": "MIT",
   "keywords": [
@@ -34,13 +34,13 @@
     "chai": "^4.1.2"
   },
   "bugs": {
-    "url": "https://github.com/Pix---/ioBroker.epson_stylus_px830/issues"
+    "url": "https://github.com/rrov1/ioBroker.epson_workforce/issues"
   },
   "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit"
   },
   "maintainers": [
-    "pix"
+    "rrov1"
   ]
 }
