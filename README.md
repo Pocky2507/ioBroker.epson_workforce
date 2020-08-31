@@ -16,45 +16,10 @@ Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Pix---/
 
 :uk: [Documentation](/docs/en/doc_epson_stylus_px830_en.md)
 
-:ru: [Документация](/docs/en/doc_epson_stylus_px830_en.md)
-
-:portugal: [Documentação](/docs/en/doc_epson_stylus_px830_en.md)
-
-:netherlands: [Documentatie](/docs/en/doc_epson_stylus_px830_en.md)
-
-:fr: [Documentation](/docs/en/doc_epson_stylus_px830_en.md)
-
-:it: [Documentazione](/docs/en/doc_epson_stylus_px830_en.md)
-
-:es: [Documentación](/docs/en/doc_epson_stylus_px830_en.md)
-
-:poland: [Dokumentacja](/docs/en/doc_epson_stylus_px830_en.md)
 
 ## Changelog
-### 0.2.1 (2018-08-08)
-* (pix) 0.2.1 Typo fixed
-
-### 0.2.0 (2018-08-03)
-* (pix) 0.2.0 Material design complete. Minor issues fixed
-
-### 0.1.4 (2018-04-23)
-* (pix) settings window design
-
-### 0.1.2 (2018-04-20)
-* (pix) Readme/Documentation structure
-
-### 0.1.1 (2018-04-20)
-* (pix) Translations to ru, pt, nl, fr, it, es and pl language
-
-### 0.1.0 (2018-04-20)
-* (pix) Admin3 ready
-* (pix) Documentation
-
-### 0.0.2 (2016-06-27)
-* (pix) fixed connection state
-
-### 0.0.1 (2016-06-22)
-* (pix) first release
+### 0.0.1 (2020-08-30)
+* (rrov1) forked from iobroker.epson_stylus_px830 0.2.1
 
 ## ToDo
 * Nicer icon !
