@@ -114,7 +114,7 @@ function readPrinter() {
                     ack: false
                 });*/
     var unreach = true;
-    request(link, function(error, response, body) {
+    request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
         if (!error && response.statusCode === 200) {
         
             unreach = false;
