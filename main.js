@@ -117,6 +117,7 @@ function readPrinterStatus() {
             // read firmware version
             var firmware_cut_position = body.indexOf(firmware_cut) + firmware_cut.length,
                 firmware_cut2_position = body.indexOf(firmware_cut2) - 1;
+            adapter.log.debug(firmware_cut_position + 'pos 2' + firmware_cut2_position);
             var firmware_string = body.substring(firmware_cut_position, firmware_cut2_position);
             adapter.setState('firmware', {val: firmware_string, ack: true});
 

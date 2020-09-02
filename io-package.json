@@ -23,7 +23,7 @@
         },
         "mode": "daemon",
         "platform": "javascript/Node.js",
-        "loglevel": "info",
+        "loglevel": "debug",
         "materialize": true,
         "keywords": [
             "printer",
