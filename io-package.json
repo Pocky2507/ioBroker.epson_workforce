@@ -139,6 +139,30 @@
                 "write": false
             },
             "native": {}
+        },
+        {
+            "_id": "firmware",
+            "type": "state",
+            "common": {
+                "name": "Printer Firmware",
+                "desc": "Printer firmware version",
+                "type": "string",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "serial",
+            "type": "state",
+            "common": {
+                "name": "Printer Serial Number",
+                "desc": "Printer serial number",
+                "type": "string",
+                "read": true,
+                "write": false
+            },
+            "native": {}
         }
     ]
 }

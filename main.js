@@ -16,13 +16,7 @@ var adapter = utils.Adapter({
     name: 'epson_workforce',
     systemConfig: true,
     useFormatDate: true,
-    /*stateChange: function(id, state) {
-        if (!id || !state || state.ack) return;
-        //if ((!id.match(/\.level\w*$/) || (!id.match(/\.cid\w*$/)) return; // if datapoint is not "level" or not "cid"
-        adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-        adapter.log.debug('input value: ' + state.val.toString());
-        //controlPrinter(id, state.val.toString()); // Probably Shutdown or Wakeup command
-    },*/
+    
     unload: function(callback) {
         try {
             adapter.log.info('terminating epson printer adapter');
@@ -91,28 +85,20 @@ function readSettings() {
     } // end ip entered
 }
 
-function readPrinter() {
+function readPrinterStatus() {
 
-    var name_cut = 'Druckername&nbsp;:&nbsp;',
-        name_cut2 = 'Verbindungsstatus',
-        connect_cut = 'Verbindungsstatus&nbsp;:&nbsp;',
-        connect_cut2 = 'IP-Adresse beziehen',
-        model_cut = '<title>',
-        model_cut2 = '</title>',
-        mac_cut = 'MAC-Adresse&nbsp;:&nbsp;',
-        mac_cut2 = '</textarea>',
-        message_cut = "<div class='message' id='message_id' style='direction:ltr; unicode-bidi:bidi-override;'>",
-        message_cut2 = "</div><form method";
+    var mac_cut = 'MAC-Adresse&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
+        mac_cut2 = '</div>'
+        firmware_cut = 'Firmware-Version&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">', 
+        firmware_cut2 = '</div>',
+        serial_cut = 'Seriennummer&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
+        serial_cut2 = '<div>';
  
     adapter.setState('ip', {
         val: ip,
         ack: false
     });
  
-    /* evtl. adapter.setState('UNREACH', {
-                    val: true,
-                    ack: false
-                });*/
     var unreach = true;
     request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
         if (!error && response.statusCode === 200) {
@@ -122,30 +108,25 @@ function readPrinter() {
                 val: ip,
                 ack: true
             });
-             // NAME EINLESEN
-            var name_cut_position = body.indexOf(name_cut) + name_cut.length,
-                name_cut2_position = body.indexOf(name_cut2) - 1;
-            var name_string = body.substring(name_cut_position, name_cut2_position);
-            adapter.setState('name', {val: name_string, ack: true});  
-            
-            // MODELL EINLESEN
-            var model_cut_position = body.indexOf(model_cut) + model_cut.length,
-                model_cut2_position = body.indexOf(model_cut2);
-            var model_string = body.substring(model_cut_position, model_cut2_position);
-            adapter.setState('model', {val: model_string, ack: true});  
             
             // MAC ADRESSE EINLESEN
             var mac_cut_position = body.indexOf(mac_cut) + mac_cut.length,
                 mac_cut2_position = body.indexOf(mac_cut2) - 1;
             var mac_string = body.substring(mac_cut_position, mac_cut2_position);
-            adapter.setState('mac', {val: mac_string, ack: true});     
-        
-            // CONNECTION EINLESEN
-            var connect_cut_position = body.indexOf(connect_cut) + connect_cut.length,
-                connect_cut2_position = body.indexOf(connect_cut2) - 1;
-            var connect_string = body.substring(connect_cut_position, connect_cut2_position);
-            adapter.setState('connect', {val: connect_string, ack: true});   
+            adapter.setState('mac', {val: mac_string, ack: true});
+            
+            // read firmware version
+            var firmware_cut_position = body.indexOf(firmware_cut) + firmware_cut.length,
+                firmware_cut2_position = body.indexOf(firmware_cut2) - 1;
+            var firmware_string = body.substring(firmware_cut_position, firmware_cut2_position);
+            adapter.setState('firmware', {val: firmware_string, ack: true});
 
+            // read serial number
+            var serial_cut_position = body.indexOf(serial_cut) + serial_cut.length,
+                serial_cut2_position = body.indexOf(serial_cut2) - 1;
+            var serial_string = body.substring(serial_cut_position, serial_cut2_position);
+            adapter.setState('serial', {val: serial_string, ack: true});
+        
             for (var i in ink) {
                adapter.setObjectNotExists('inks.' + ink[i].state + '.level', {
                     type: 'state',
@@ -172,7 +153,6 @@ function readPrinter() {
                     },
                     native: {}
                 });
-                // ggf. erstellen bestätigen
            
                 // read levels
             
@@ -203,19 +183,76 @@ function readPrinter() {
             ack: true
         });
     }); // End request 
-    adapter.log.debug('finished reading printer Data');
+    adapter.log.debug('finished reading printer status data');
+}
+
+function readPrinterNetWork() {
+
+    var name_cut = 'Druckername&nbsp;:&nbsp;',
+        name_cut2 = 'Verbindungsstatus',
+        connect_cut = 'Verbindungsstatus&nbsp;:&nbsp;',
+        connect_cut2 = 'IP-Adresse beziehen',
+        model_cut = '<title>',
+        model_cut2 = '</title>';
+ 
+    adapter.setState('ip', {
+        val: ip,
+        ack: false
+    });
+ 
+    var unreach = true;
+    request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+        
+            unreach = false;
+            adapter.setState('ip', {
+                val: ip,
+                ack: true
+            });
+             // NAME EINLESEN
+            var name_cut_position = body.indexOf(name_cut) + name_cut.length,
+                name_cut2_position = body.indexOf(name_cut2) - 1;
+            var name_string = body.substring(name_cut_position, name_cut2_position);
+            adapter.setState('name', {val: name_string, ack: true});  
+            
+            // MODELL EINLESEN
+            var model_cut_position = body.indexOf(model_cut) + model_cut.length,
+                model_cut2_position = body.indexOf(model_cut2);
+            var model_string = body.substring(model_cut_position, model_cut2_position);
+            adapter.setState('model', {val: model_string, ack: true});  
+            
+            // CONNECTION EINLESEN
+            var connect_cut_position = body.indexOf(connect_cut) + connect_cut.length,
+                connect_cut2_position = body.indexOf(connect_cut2) - 1;
+            var connect_string = body.substring(connect_cut_position, connect_cut2_position);
+            adapter.setState('connect', {val: connect_string, ack: true});
+            
+            adapter.log.debug('Channels and states created/read');
+            
+        } else {
+            adapter.log.warn('Cannot connect to Printer: ' + error);
+            unreach = true;
+        }
+        // Write connection status
+        adapter.setState('UNREACH', {
+            val: unreach,
+            ack: true
+        });
+    }); // End request 
+    adapter.log.debug('finished reading printer network data');
 }
 
 function stopReadPrinter() {
     clearInterval(callReadPrinter);
-    adapter.log.info('Epson Stylus PX830 adapter stopped');
+    adapter.log.info('Epson Workforce adapter stopped');
 }
 
 function main() {
     //adapter.subscribeStates('*'); 
     readSettings();
-    adapter.log.debug('Epson Stylus PX830 adapter started...');
-    readPrinter();
+    adapter.log.debug('Epson Workforce adapter started...');
+    readPrinterNetwork();
+    readPrinterStatus();
     callReadPrinter = setInterval(function() {
         adapter.log.debug('connecting printer webserver ...');
         readPrinter();
