@@ -9,7 +9,6 @@ var callReadPrinter;
 var ip = '';
 var baselevel = 50; // bedeutet: in der Webseite wird ein Balken von 100% Höhe 50px hoch gezeichnet. 
                     // Also entspricht ein gezeigtes Tintenlevel von 25 (px) dann 50% und eines von 10 (px) dann 20%
-var link = '';
 var sync = 180;
 
 var adapter = utils.Adapter({
@@ -76,7 +75,6 @@ function readSettings() {
     else { // ip entered
         ip = (adapter.config.printerport.length > 0) ? adapter.config.printerip + ':' + adapter.config.printerport : adapter.config.printerip; // if port is set then ip+port else ip only
         adapter.log.debug('IP: ' + ip);
-        link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP';
     
         //check if sync time is entered in settings
         sync = (!adapter.config.synctime) ? 180 : parseInt(adapter.config.synctime,10);
@@ -87,7 +85,8 @@ function readSettings() {
 
 function readPrinterStatus() {
 
-    var mac_cut = 'MAC-Adresse&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
+    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP',
+        mac_cut = 'MAC-Adresse&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
         mac_cut2 = '</div>'
         firmware_cut = 'Firmware-Version&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">', 
         firmware_cut2 = '</div>',
@@ -186,9 +185,10 @@ function readPrinterStatus() {
     adapter.log.debug('finished reading printer status data');
 }
 
-function readPrinterNetWork() {
+function readPrinterNetwork() {
 
-    var name_cut = 'Druckername&nbsp;:&nbsp;',
+    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_NWINFO/TOP',
+        name_cut = 'Druckername&nbsp;:&nbsp;',
         name_cut2 = 'Verbindungsstatus',
         connect_cut = 'Verbindungsstatus&nbsp;:&nbsp;',
         connect_cut2 = 'IP-Adresse beziehen',
