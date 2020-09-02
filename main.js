@@ -184,7 +184,7 @@ function readPrinter() {
                 adapter.log.debug(ink[i].name + ' Level: ' + level + '%');
               
                 // read cartridge
-                cut_position = body.indexOf(ink[i].cartridge_cut) + ink[i].cartridge_cut.length + 1;
+                cut_position = body.indexOf(ink[i].cartridge_cut) + ink[i].cartridge_cut.length;
                 var cut_end_pos = body.indexOf("<", cut_position + 1);
                 var cartridge_string = body.substring(cut_position, cut_end_pos);
                 adapter.log.debug(ink[i].name + ' cartridgestring: ' + cartridge_string);
