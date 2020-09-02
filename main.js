@@ -188,8 +188,8 @@ function readPrinterStatus() {
 function readPrinterNetwork() {
 
     var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_NWINFO/TOP',
-        name_cut = 'Druckername&nbsp;:&nbsp;',
-        name_cut2 = 'Verbindungsstatus',
+        name_cut = 'Druckername&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
+        name_cut2 = '</div>',
         connect_cut = 'Verbindungsstatus&nbsp;:&nbsp;',
         connect_cut2 = 'IP-Adresse beziehen',
         model_cut = '<title>',
