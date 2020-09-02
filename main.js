@@ -87,7 +87,7 @@ function readPrinterStatus() {
 
     var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP',
         mac_cut = 'MAC-Adresse&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
-        mac_cut2 = '</div>'
+        mac_cut2 = '</div>',
         firmware_cut = 'Firmware-Version&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">', 
         firmware_cut2 = '</div>',
         serial_cut = 'Seriennummer&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
