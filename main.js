@@ -44,31 +44,31 @@ var ink = {
         'state': 'cyan',
         'name': 'Cyan',
         'cut':  'IMAGE/Ink_C.PNG\' height=',
-        'cartridge': 'T0802'    
+        'cartridge_cut': '(C)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
     },
     'yellow' : {
         'state': 'yellow',
         'name': 'Yellow',
         'cut':  'IMAGE/Ink_Y.PNG\' height=',
-        'cartridge': 'T0804'    
+        'cartridge_cut': '(Y)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
     },
     'black' : {
         'state': 'black',
         'name': 'Black',
         'cut':  'IMAGE/Ink_K.PNG\' height=',
-        'cartridge': 'Black27'    
+        'cartridge_cut': '(BK)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
     },
     'magenta' : {
         'state': 'magenta',
         'name': 'Magenta',
         'cut':  'IMAGE/Ink_M.PNG\' height=',
-        'cartridge': 'T0803'    
+        'cartridge_cut': '(M)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
     },
     'waste' : {
         'state': 'waste',
         'name': 'Waste',
         'cut':  'IMAGE/Ink_Waste.PNG\' height=',
-        'cartridge': 'Waste'    
+        'cartridge_cut': 'Wartungsbox&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
     }
 };
 
@@ -82,7 +82,7 @@ function readSettings() {
     else { // ip entered
         ip = (adapter.config.printerport.length > 0) ? adapter.config.printerip + ':' + adapter.config.printerport : adapter.config.printerip; // if port is set then ip+port else ip only
         adapter.log.debug('IP: ' + ip);
-        link = 'http://' + ip + '/PRESENTATION/HTML/TOP/PRTINFO.HTML';
+        link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP';
     
         //check if sync time is entered in settings
         sync = (!adapter.config.synctime) ? 180 : parseInt(adapter.config.synctime,10);
@@ -166,7 +166,7 @@ function readPrinter() {
                         name: 'Cartridge name for ' + ink[i].name,
                         desc: 'Cartridge name for ' + ink[i].name,
                         type: 'string',
-                        def:  ink[i].cartrigde,
+                        def:  '-',
                         read: true,
                         write: false
                     },
@@ -181,8 +181,14 @@ function readPrinter() {
                 //adapter.log.debug(ink[i].name + ' Levelstring: ' + level_string + 'px');
                 var level = parseInt(level_string,10) * 100 / parseInt(baselevel,10);
                 adapter.setState('inks.' + ink[i].state + '.level', {val: level, ack: true});
-                adapter.setState('inks.' + ink[i].state + '.cartridge', {val: ink[i].cartridge, ack: true});
                 adapter.log.debug(ink[i].name + ' Level: ' + level + '%');
+              
+                // read cartridge
+                cut_position = body.indexOf(ink[i].cartridge_cut) + ink[i].cartridge_cut.length + 1;
+                var cut_end_pos = body.indexOf("<", cut_position + 1);
+                var cartridge_string = body.substring(cut_position, cut_end_pos);
+                adapter.log.debug(ink[i].name + ' cartridgestring: ' + cartridge_string);
+                adapter.setState('inks.' + ink[i].state + '.cartridge', {val: cartridge_string, ack: true});
             } // end for
             
             adapter.log.debug('Channels and states created/read');
