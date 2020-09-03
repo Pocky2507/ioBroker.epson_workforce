@@ -91,7 +91,7 @@ function readPrinterStatus() {
         firmware_cut = 'Firmware-Version&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">', 
         firmware_cut2 = '</div>',
         serial_cut = 'Seriennummer&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
-        serial_cut2 = '<div>';
+        serial_cut2 = '</div>';
  
     adapter.setState('ip', {
         val: ip,
@@ -110,20 +110,20 @@ function readPrinterStatus() {
             
             // MAC ADRESSE EINLESEN
             var mac_cut_position = body.indexOf(mac_cut) + mac_cut.length,
-                mac_cut2_position = body.indexOf(mac_cut2) - 1;
+                mac_cut2_position = body.indexOf(mac_cut2, mac_cut_position + 1);
             var mac_string = body.substring(mac_cut_position, mac_cut2_position);
             adapter.setState('mac', {val: mac_string, ack: true});
             
             // read firmware version
             var firmware_cut_position = body.indexOf(firmware_cut) + firmware_cut.length,
-                firmware_cut2_position = body.indexOf(firmware_cut2) - 1;
+                firmware_cut2_position = body.indexOf(firmware_cut2, firmware_cut_position + 1);
             adapter.log.debug(firmware_cut_position + 'pos 2' + firmware_cut2_position);
             var firmware_string = body.substring(firmware_cut_position, firmware_cut2_position);
             adapter.setState('firmware', {val: firmware_string, ack: true});
 
             // read serial number
             var serial_cut_position = body.indexOf(serial_cut) + serial_cut.length,
-                serial_cut2_position = body.indexOf(serial_cut2) - 1;
+                serial_cut2_position = body.indexOf(serial_cut2, serial_cut_position + 1);
             var serial_string = body.substring(serial_cut_position, serial_cut2_position);
             adapter.setState('serial', {val: serial_string, ack: true});
         
@@ -212,22 +212,22 @@ function readPrinterNetwork() {
             });
              // NAME EINLESEN
             var name_cut_position = body.indexOf(name_cut) + name_cut.length,
-                name_cut2_position = body.indexOf(name_cut2) - 1;
+                name_cut2_position = body.indexOf(name_cut2, name_cut_position + 1);
             var name_string = body.substring(name_cut_position, name_cut2_position);
             adapter.setState('name', {val: name_string, ack: true});  
             
             // MODELL EINLESEN
             var model_cut_position = body.indexOf(model_cut) + model_cut.length,
-                model_cut2_position = body.indexOf(model_cut2);
+                model_cut2_position = body.indexOf(model_cut2, model_cut_position + 1);
             var model_string = body.substring(model_cut_position, model_cut2_position);
             adapter.setState('model', {val: model_string, ack: true});  
             
-            // CONNECTION EINLESEN
+/*            // CONNECTION EINLESEN
             var connect_cut_position = body.indexOf(connect_cut) + connect_cut.length,
                 connect_cut2_position = body.indexOf(connect_cut2) - 1;
             var connect_string = body.substring(connect_cut_position, connect_cut2_position);
             adapter.setState('connect', {val: connect_string, ack: true});
-            
+*/            
             adapter.log.debug('Channels and states created/read');
             
         } else {
