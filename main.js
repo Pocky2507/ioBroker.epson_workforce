@@ -36,32 +36,32 @@ var ink = {
     'cyan' : {
         'state': 'cyan',
         'name': 'Cyan',
-        'cut':  'IMAGE/Ink_C.PNG\' height=',
-        'cartridge_cut': '(C)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
+        'inklvl_rx':  "IMAGE\\/Ink_C\\.PNG\\' height=\\'([0-9]{1,2})\\'",
+        'cartridge_rx': "\\(C\\)&nbsp;\\:<\\/span><\\/dt><dd class=\\\"value clearfix\\\"><div class=\\\"preserve-white-space\\\">([a-zA-Z0-9\\/]*)<\\/div>"
     },
     'yellow' : {
         'state': 'yellow',
         'name': 'Yellow',
-        'cut':  'IMAGE/Ink_Y.PNG\' height=',
-        'cartridge_cut': '(Y)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
+        'inklvl_rx':  "IMAGE\\/Ink_Y\\.PNG\\' height=\\'([0-9]{1,2})\\'",
+        'cartridge_rx': "\\(Y\\)&nbsp;\\:<\\/span><\\/dt><dd class=\\\"value clearfix\\\"><div class=\\\"preserve-white-space\\\">([a-zA-Z0-9\\/]*)<\\/div>"    
     },
     'black' : {
         'state': 'black',
         'name': 'Black',
-        'cut':  'IMAGE/Ink_K.PNG\' height=',
-        'cartridge_cut': '(BK)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
+        'inklvl_rx':  "IMAGE\\/Ink_K\\.PNG\\' height=\\'([0-9]{1,2})\\'",
+        'cartridge_rx': "\\(BK\\)&nbsp;\\:<\\/span><\\/dt><dd class=\\\"value clearfix\\\"><div class=\\\"preserve-white-space\\\">([a-zA-Z0-9\\/]*)<\\/div>" 
     },
     'magenta' : {
         'state': 'magenta',
         'name': 'Magenta',
-        'cut':  'IMAGE/Ink_M.PNG\' height=',
-        'cartridge_cut': '(M)&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
+        'inklvl_rx':  "IMAGE\\/Ink_M\\.PNG\\' height=\\'([0-9]{1,2})\\'",
+        'cartridge_rx': "\\(M\\)&nbsp;\\:<\\/span><\\/dt><dd class=\\\"value clearfix\\\"><div class=\\\"preserve-white-space\\\">([a-zA-Z0-9\\/]*)<\\/div>"    
     },
     'waste' : {
         'state': 'waste',
         'name': 'Waste',
-        'cut':  'IMAGE/Ink_Waste.PNG\' height=',
-        'cartridge_cut': 'Wartungsbox&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">'    
+        'inklvl_rx':  "IMAGE\\/Ink_Waste\\.PNG\\' height=\\'([0-9]{1,2})\\'",
+        'cartridge_rx': "Wartungsbox&nbsp;\\:<\\/span><\\/dt><dd class=\\\"value clearfix\\\"><div class=\\\"preserve-white-space\\\">([a-zA-Z0-9\\/]*)<\\/div>"    
     }
 };
 
@@ -155,20 +155,23 @@ function readPrinterStatus() {
                 });
            
                 // read levels
-            
-                var cut_position = body.indexOf(ink[i].cut) + ink[i].cut.length + 1;
-                var level_string = body.substring(cut_position, cut_position + 2);
-                //adapter.log.debug(ink[i].name + ' Levelstring: ' + level_string + 'px');
+                rx = new RegExp(ink[i].inklvl_rx, "g");
+                while((match = rx.exec(body)) != null) {
+                    var level_string = match[1];
+                }
+                adapter.log.debug(ink[i].name + ' Levelstring: ' + level_string + 'px');
                 var level = parseInt(level_string,10) * 100 / parseInt(baselevel,10);
                 adapter.setState('inks.' + ink[i].state + '.level', {val: level, ack: true});
                 adapter.log.debug(ink[i].name + ' Level: ' + level + '%');
               
                 // read cartridge
-                cut_position = body.indexOf(ink[i].cartridge_cut) + ink[i].cartridge_cut.length;
-                var cut_end_pos = body.indexOf("<", cut_position + 1);
-                var cartridge_string = body.substring(cut_position, cut_end_pos);
-                adapter.log.debug(ink[i].name + ' cartridgestring: ' + cartridge_string);
+                rx = new RegExp(ink[i].cartridge_rx, "g");
+                while((match = rx.exec(body)) != null) {
+                    var cartridge_string = match[1];
+                }
+                adapter.log.debug(ink[i].name + ' cartridge_string: ' + cartridge_string);
                 adapter.setState('inks.' + ink[i].state + '.cartridge', {val: cartridge_string, ack: true});
+                
             } // end for
             
             adapter.log.debug('Channels and states created/read');
