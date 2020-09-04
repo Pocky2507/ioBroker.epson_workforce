@@ -85,13 +85,7 @@ function readSettings() {
 
 function readPrinterStatus() {
 
-    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP',
-        mac_cut = 'MAC-Adresse&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
-        mac_cut2 = '</div>',
-        firmware_cut = 'Firmware-Version&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">', 
-        firmware_cut2 = '</div>',
-        serial_cut = 'Seriennummer&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
-        serial_cut2 = '</div>';
+    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP';
  
     adapter.setState('ip', {
         val: ip,
@@ -108,25 +102,31 @@ function readPrinterStatus() {
                 ack: true
             });
             
+            var match, rx;
             // MAC ADRESSE EINLESEN
-            var mac_cut_position = body.indexOf(mac_cut) + mac_cut.length,
-                mac_cut2_position = body.indexOf(mac_cut2, mac_cut_position + 1);
-            var mac_string = body.substring(mac_cut_position, mac_cut2_position);
+            rx = new RegExp( /(?:MAC-Adresse|Printer Name|Adresse MAC Wi-Fi\/R.seau|Indirizzo MAC Wi-Fi\/rete|Dirección MAC de Wi-Fi\/Red|Endereço MAC de Wi-Fi\/Rede)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9:]*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var mac_string = match[1];
+            }
+            adapter.log.debug('mac_string: ' + mac_string);
             adapter.setState('mac', {val: mac_string, ack: true});
             
             // read firmware version
-            var firmware_cut_position = body.indexOf(firmware_cut) + firmware_cut.length,
-                firmware_cut2_position = body.indexOf(firmware_cut2, firmware_cut_position + 1);
-            adapter.log.debug(firmware_cut_position + 'pos 2' + firmware_cut2_position);
-            var firmware_string = body.substring(firmware_cut_position, firmware_cut2_position);
+            rx = new RegExp( /(?:Firmware-Version|Firmware Version|Version firmware|Versione firmware|Versión del firmware|Versão do firmware)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9 äöüÄÖÜ\-\_\.]*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var firmware_string = match[1];
+            }
+            adapter.log.debug('firmware_string: ' + firmware_string);
             adapter.setState('firmware', {val: firmware_string, ack: true});
 
             // read serial number
-            var serial_cut_position = body.indexOf(serial_cut) + serial_cut.length,
-                serial_cut2_position = body.indexOf(serial_cut2, serial_cut_position + 1);
-            var serial_string = body.substring(serial_cut_position, serial_cut2_position);
+            rx = new RegExp( /(?:Seriennummer|Serial Number|Numéro de série|Numero di serie|Número de serie|Número de série)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9]*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var serial_string = match[1];
+            }
+            adapter.log.debug('serial_string: ' + serial_string);
             adapter.setState('serial', {val: serial_string, ack: true});
-        
+
             for (var i in ink) {
                adapter.setObjectNotExists('inks.' + ink[i].state + '.level', {
                     type: 'state',
@@ -188,13 +188,7 @@ function readPrinterStatus() {
 
 function readPrinterNetwork() {
 
-    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_NWINFO/TOP',
-        name_cut = 'Druckername&nbsp;:</span></dt><dd class="value clearfix"><div class="preserve-white-space">',
-        name_cut2 = '</div>',
-        connect_cut = 'Verbindungsstatus&nbsp;:&nbsp;',
-        connect_cut2 = 'IP-Adresse beziehen',
-        model_cut = '<title>',
-        model_cut2 = '</title>';
+    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_NWINFO/TOP';
  
     adapter.setState('ip', {
         val: ip,
@@ -210,24 +204,24 @@ function readPrinterNetwork() {
                 val: ip,
                 ack: true
             });
-             // NAME EINLESEN
-            var name_cut_position = body.indexOf(name_cut) + name_cut.length,
-                name_cut2_position = body.indexOf(name_cut2, name_cut_position + 1);
-            var name_string = body.substring(name_cut_position, name_cut2_position);
-            adapter.setState('name', {val: name_string, ack: true});  
+            
+            var match, rx;
+            // NAME EINLESEN
+            rx = new RegExp( /(?:Druckername|Printer Name|Nom de l\'imprimante|Nome stampante|Nombre de la impresora|Nome da impressora)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9 äöüÄÖÜ\-\_]*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var name_string = match[1];
+            }
+            adapter.log.debug('name_string: ' + name_string);
+            adapter.setState('name', {val: name_string, ack: true});
             
             // MODELL EINLESEN
-            var model_cut_position = body.indexOf(model_cut) + model_cut.length,
-                model_cut2_position = body.indexOf(model_cut2, model_cut_position + 1);
-            var model_string = body.substring(model_cut_position, model_cut2_position);
-            adapter.setState('model', {val: model_string, ack: true});  
+            rx = new RegExp( /<title>([a-zA-Z0-9 äöüÄÖÜ\-\_]*)<\/title>/g );
+            while((match = rx.exec(body)) != null) {
+                var model_string = match[1];
+            }
+            adapter.log.debug('model_string: ' + model_string);
+            adapter.setState('model', {val: model_string, ack: true});
             
-/*            // CONNECTION EINLESEN
-            var connect_cut_position = body.indexOf(connect_cut) + connect_cut.length,
-                connect_cut2_position = body.indexOf(connect_cut2) - 1;
-            var connect_string = body.substring(connect_cut_position, connect_cut2_position);
-            adapter.setState('connect', {val: connect_string, ack: true});
-*/            
             adapter.log.debug('Channels and states created/read');
             
         } else {

@@ -36,7 +36,7 @@
         ],
         "main": "main.js",
         "authors": [
-            "Pix"
+            "rrov1"
         ],
         "license": "MIT",
         "readme": "https://github.com/rrov1/ioBroker.epson_workforce/blob/master/README.md",
@@ -109,18 +109,6 @@
             "common": {
                 "name": "Printer Name",
                 "desc": "Printer Name",
-                "type": "string",
-                "read": true,
-                "write": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "connect",
-            "type": "state",
-            "common": {
-                "name": "Connection",
-                "desc": "Connection",
                 "type": "string",
                 "read": true,
                 "write": false
