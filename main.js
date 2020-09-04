@@ -240,6 +240,60 @@ function readPrinterNetwork() {
     adapter.log.debug('finished reading printer network data');
 }
 
+function readPrinterMaintenance() {
+
+    var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_MENTINFO/TOP';
+ 
+    adapter.setState('ip', {
+        val: ip,
+        ack: false
+    });
+ 
+    var unreach = true;
+    request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+        
+            unreach = false;
+            adapter.setState('ip', {
+                val: ip,
+                ack: true
+            });
+            
+            var match, rx;
+            // ERSTDRUCKDATUM EINLESEN
+            rx = new RegExp( /(?:Erstdruckdatum|First Printing Date|Date de première impression|Data prima stampa|Primera fecha de impresión|Data da primeira impressão)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d\d\-\d\d\-\d\d\d\d)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var first_print_string = match[1];
+            }
+            adapter.log.debug('first_print_string: ' + first_print_string);
+            adapter.setState('first_print_date', {val: first_print_string, ack: true});
+            
+            // GESAMTZAHL SEITEN
+            rx = new RegExp( /(?:Gesamtanzahl Seiten)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var printed_pages_string = match[1];
+            }
+            adapter.log.debug('printed_pages_string: ' + printed_pages_string);
+            var page_count = parseInt(printed_pages_string, 10);
+            adapter.log.debug('page_count: ' + page_count);
+            adapter.setState('page_count', {val: page_count, ack: true});
+
+
+            adapter.log.debug('Channels and states created/read');
+            
+        } else {
+            adapter.log.warn('Cannot connect to Printer: ' + error);
+            unreach = true;
+        }
+        // Write connection status
+        adapter.setState('UNREACH', {
+            val: unreach,
+            ack: true
+        });
+    }); // End request 
+    adapter.log.debug('finished reading printer maintenance data');
+}
+
 function stopReadPrinter() {
     clearInterval(callReadPrinter);
     adapter.log.info('Epson Workforce adapter stopped');
@@ -251,6 +305,7 @@ function main() {
     adapter.log.debug('Epson Workforce adapter started...');
     readPrinterNetwork();
     readPrinterStatus();
+    readPrinterMaintenance();
     callReadPrinter = setInterval(function() {
         adapter.log.debug('connecting printer webserver ...');
         readPrinter();

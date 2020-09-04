@@ -23,7 +23,7 @@
         },
         "mode": "daemon",
         "platform": "javascript/Node.js",
-        "loglevel": "debug",
+        "loglevel": "info",
         "materialize": true,
         "keywords": [
             "printer",
@@ -145,8 +145,32 @@
             "type": "state",
             "common": {
                 "name": "Printer Serial Number",
-                "desc": "Printer serial number",
+                "desc": "Printer Serial Number",
                 "type": "string",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "first_print_date",
+            "type": "state",
+            "common": {
+                "name": "Printer First Print Date",
+                "desc": "Printer First Print Date",
+                "type": "string",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "page_count",
+            "type": "state",
+            "common": {
+                "name": "Printed Pages Count",
+                "desc": "Printed Pages Count",
+                "type": "number",
                 "read": true,
                 "write": false
             },

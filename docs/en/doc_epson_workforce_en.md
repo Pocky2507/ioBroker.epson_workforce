@@ -1,45 +1,49 @@
 ![Logo](../../admin/epson_stylus_px830.png)
-# ioBroker.epson_stylus_px830
+# ioBroker.epson_workforce
 
 ## Description
-This adapter reads the ink levels of an Epson Stylus Photo PX830 from the printers website
+This adapter reads the ink levels of an Epson Stylus Workforce from the printers website
 
-![alt text](img/printer_website.png "Website of EPSON Stylus Photo PX830")
+![alt text](img/printer_website.png "Website of EPSON Workforce")
 
 ## Configuration
 ### IP / Port
 IP adress of Epson Printer within local network. The adapter will stop if no IP is entered. The port number is optional and only will be considered if an ip adress was set before.
+![alt text](../../img/epson_workforce_settings_screenshot.jpg "Screenshot Settings")
 
 ### Synchronisation
 In synctime you can choose the frequency of connections to the printer in minutes. Default is 180min, input is optional.
-
-##  Datapoints
-![alt text](img/epson_stylus_px830SettingScreenshot.jpg "Screenshot Settings")
 
 ## Schedule
 The adapter starts as often as set up in the settings window.
 
 ## Datapoints
 
-epson_stylus_px830.0.__UNREACH__ (*boolean*)
+epson_workforce.0.__UNREACH__ (*boolean*)
 
-epson_stylus_px830.0.__connect__ (*string*) type of connection (WLAN,Eth)
+epson_workforce.0.__firmware__ (*string*) firmware version
 
-epson_stylus_px830.0.__name__  (*string*)
+epson_workforce.0.__first_print_date__ (*string*) first print date
 
-epson_stylus_px830.0.__model__ (*string*)
+epson_workforce.0.__name__  (*string*)
 
-epson_stylus_px830.0.__mac__ (*string*)
+epson_workforce.0.__model__ (*string*)
 
-epson_stylus_px830.0.__IP__(*string*)
+epson_workforce.0.__mac__ (*string*)
 
-epson_stylus_px830.0.__inks__ (*channel*)
+epson_workforce.0.__page_count__ (*number*)
+
+epson_workforce.0.__serial__ (*string*)
+
+epson_workforce.0.__IP__(*string*)
+
+epson_workforce.0.__inks__ (*channel*)
 
 For every color:
 
-epson_stylus_px830.0.__inks.color.level__ (*number 0-100%*)
+epson_workforce.0.__inks.color.level__ (*number 0-100%*)
 
-epson_stylus_px830.0.__inks.color.cartridge__ (*string*) -> Epson product name for its ink
+epson_workforce.0.__inks.color.cartridge__ (*string*) -> Epson product name for its ink
 
 ## VIS
 ### Widget

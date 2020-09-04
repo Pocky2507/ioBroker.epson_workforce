@@ -12,9 +12,9 @@
 **Tests:** Linux/Mac: [![Travis-CI](http://img.shields.io/travis/Pix---/ioBroker.epson_stylus_px830/master.svg)](https://travis-ci.org/Pix---/ioBroker.epson_stylus_px830)
 Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Pix---/ioBroker.epson_stylus_px830?branch=master&svg=true)](https://ci.appveyor.com/project/Pix---/ioBroker-epson_stylus_px830/)
 
-:de: [Dokumentation](/docs/de/doc_epson_stylus_px830_de.md)
+:de: [Dokumentation](/docs/de/doc_epson_workforce_de.md)
 
-:uk: [Documentation](/docs/en/doc_epson_stylus_px830_en.md)
+:uk: [Documentation](/docs/en/doc_epson_workforce_en.md)
 
 
 ## Changelog
@@ -30,7 +30,7 @@ Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Pix---/
 
 The MIT License (MIT)
 
-Copyright (c) 2020 pix
+Copyright (c) 2020 rrov1
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,3 +52,5 @@ SOFTWARE.
 
 ---
 *Dank an die Erfinder des Basisskripts zum Parsen der Daten, Idittmar und MistyReblaus aus dem [Homematic-Forum](http://homematic-forum.de/forum/viewtopic.php?f=31&t=25140).* :+1: 
+
+*Dank an pix für die Vorlage

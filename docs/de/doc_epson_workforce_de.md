@@ -9,12 +9,10 @@ Dieser Adapter liest den Zustand der Tintenpatronen eines Epson Workforce Drucke
 ## Einstellungen
 ### IP / Port
 Die IP Adresse des Druckers im lokalen Netzwerk. Ohne Eingabe gibt es keine Abfrage. Die Portnummer ist optional und wird nur bei Eingabe einer IP-Adresse berücksichtigt.
+![alt text](../../img/epson_workforce_settings_screenshot.jpg "Screenshot Einstellungen")
 
 ### Synchronisation
 Dauer zwischen den Abfragen des Druckers durch ioBroker. Die Eingabe ist optional. Standard ist 180 Minuten (alle 3 Stunden).
-
-##  Datenpunkte
-![alt text](img/epson_stylus_px830SettingScreenshot.jpg "Screenshot Einstellungen")
 
 ## Aktivierung
 Der Adapter startet chronologisch wie in den Einstellungen angegeben.
@@ -23,13 +21,19 @@ Der Adapter startet chronologisch wie in den Einstellungen angegeben.
 
 epson_workforce.0.__UNREACH__ (*boolean*)
 
-epson_workforce.0.__connect__ (*string*) type of connection (WLAN,Eth)
+epson_workforce.0.__firmware__ (*string*) firmware version
+
+epson_workforce.0.__first_print_date__ (*string*) first print date
 
 epson_workforce.0.__name__  (*string*)
 
 epson_workforce.0.__model__ (*string*)
 
 epson_workforce.0.__mac__ (*string*)
+
+epson_workforce.0.__page_count__ (*number*)
+
+epson_workforce.0.__serial__ (*string*)
 
 epson_workforce.0.__IP__(*string*)
 
