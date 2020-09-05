@@ -308,6 +308,8 @@ function main() {
     readPrinterMaintenance();
     callReadPrinter = setInterval(function() {
         adapter.log.debug('connecting printer webserver ...');
-        readPrinter();
+        readPrinterNetwork();
+        readPrinterStatus();
+        readPrinterMaintenance();
     }, sync * 1000 * 60);
 }
