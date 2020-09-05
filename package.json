@@ -9,7 +9,7 @@
   "homepage": "https://github.com/rrov1/ioBroker.epson_workforce",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rrov1/ioBroker.epson_workforce.git"
+    "url": "https://github.com/rrov1/ioBroker.epson_workforce.git"
   },
   "license": "MIT",
   "keywords": [
