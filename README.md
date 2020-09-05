@@ -1,16 +1,11 @@
 ![Logo](admin/epson_stylus_px830.png)
 # ioBroker.epson_workforce
 
-![Number of Installations](http://iobroker.live/badges/epson_stylus_px830-installed.svg) ![Number of Installations](http://iobroker.live/badges/epson_stylus_px830-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.epson_stylus_px830.svg)](https://www.npmjs.com/package/iobroker.epson_stylus_px830)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.epson_stylus_px830.svg)](https://www.npmjs.com/package/iobroker.epson_stylus_px830)
+![Number of Installations](http://iobroker.live/badges/epson_workforce-installed.svg) ![Number of Installations](http://iobroker.live/badges/epson_workforce-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.epson_workforce.svg)](https://www.npmjs.com/package/iobroker.epson_workforce)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.epson_workforce.svg)](https://www.npmjs.com/package/iobroker.epson_workforce)
 
-[![NPM](https://nodei.co/npm/iobroker.epson_stylus_px830.png?downloads=true)](https://nodei.co/npm/iobroker.epson_stylus_px830/)
+[![NPM](https://nodei.co/npm/iobroker.epson_workforce.png?downloads=true)](https://nodei.co/npm/iobroker.epson_workforce/)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/827f4b69c4654bd9be86eef485f13b8e)](https://www.codacy.com/app/Pix---/ioBroker.epson_stylus_px830?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Pix---/ioBroker.epson_stylus_px830&amp;utm_campaign=Badge_Grade)
-[![Known Vulnerabilities](https://snyk.io/test/github/Pix---/ioBroker.epson_stylus_px830/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Pix---/ioBroker.epson_stylus_px830?targetFile=package.json)
-
-**Tests:** Linux/Mac: [![Travis-CI](http://img.shields.io/travis/Pix---/ioBroker.epson_stylus_px830/master.svg)](https://travis-ci.org/Pix---/ioBroker.epson_stylus_px830)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/Pix---/ioBroker.epson_stylus_px830?branch=master&svg=true)](https://ci.appveyor.com/project/Pix---/ioBroker-epson_stylus_px830/)
 
 :de: [Dokumentation](/docs/de/doc_epson_workforce_de.md)
 

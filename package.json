@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.epson_workforce",
+  "name": "@rrov1/iobroker.epson_workforce",
   "description": "Ink status of Epson Workforce printers",
   "version": "0.0.1",
   "author": "rrov1",
@@ -9,7 +9,7 @@
   "homepage": "https://github.com/rrov1/ioBroker.epson_workforce",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rrov1/ioBroker.epson_workforce"
+    "url": "git+https://github.com/rrov1/ioBroker.epson_workforce.git"
   },
   "license": "MIT",
   "keywords": [
@@ -42,5 +42,9 @@
   },
   "maintainers": [
     "rrov1"
-  ]
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
 }
