@@ -14,11 +14,14 @@
             "en": "docs/en/doc_epson_workforce_en.md",
             "de": "docs/de/doc_epson_workforce_de.md"
         },
-        "version": "0.0.2",
+        "version": "0.0.3",
         "news": {
-            "0.0.2": {
-                "en": "readme fixed",
-                "de": "readme korrigiert"
+            "0.0.3": {
+                "en": "install failure of package fixed",
+                "de": "Installationsfehler korrigiert"
+            },"0.0.2": {
+                "en": "switched to regexp, added multi language printer page support and added more states",
+                "de": "Umstellung auf regexp, Erkennung der Werte auf der Druckerseite in allen Sprachen, mehr Statuswerte bereitgestellt"
             },
             "0.0.1": {
                 "en": "forked from pix Epson Stylus PX830",

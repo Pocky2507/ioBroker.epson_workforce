@@ -13,6 +13,9 @@
 
 
 ## Changelog
+### 0.0.3 (2020-09-06)
+* (rrov1) install failure of package fixed
+
 ### 0.0.2 (2020-09-06)
 * (rrov1) switched to regexp and multi language support
 * added more states
