@@ -13,6 +13,10 @@
 
 
 ## Changelog
+### 0.0.2 (2020-09-06)
+* (rrov1) switched to regexp and multi language support
+* added more states
+
 ### 0.0.1 (2020-08-30)
 * (rrov1) forked from iobroker.epson_stylus_px830 0.2.1
 

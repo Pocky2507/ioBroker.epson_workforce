@@ -14,7 +14,7 @@
             "en": "docs/en/doc_epson_workforce_en.md",
             "de": "docs/de/doc_epson_workforce_de.md"
         },
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
             "0.0.2": {
                 "en": "readme fixed",
