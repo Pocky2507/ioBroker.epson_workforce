@@ -1,4 +1,4 @@
-![Logo](admin/epson_stylus_px830.png)
+![Logo](admin/epson_workforce.png)
 # ioBroker.epson_workforce
 
 ![Number of Installations](http://iobroker.live/badges/epson_workforce-installed.svg) ![Number of Installations](http://iobroker.live/badges/epson_workforce-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.epson_workforce.svg)](https://www.npmjs.com/package/iobroker.epson_workforce)
@@ -13,6 +13,9 @@
 
 
 ## Changelog
+### 0.0.4 (2020-09-06)
+* (rrov1) minor changes due to warning messages with new js-controller versions
+
 ### 0.0.3 (2020-09-06)
 * (rrov1) install failure of package fixed
 

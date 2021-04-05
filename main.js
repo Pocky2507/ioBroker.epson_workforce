@@ -70,7 +70,7 @@ function readSettings() {
     
     if (!adapter.config.printerip) {
         adapter.log.warn('No IP adress of printer set up. Adapter will be stopped.');
-        //stopReadPrinter();
+        stopReadPrinter();
     } 
     else { // ip entered
         ip = (adapter.config.printerport.length > 0) ? adapter.config.printerip + ':' + adapter.config.printerport : adapter.config.printerip; // if port is set then ip+port else ip only
@@ -93,7 +93,7 @@ function readPrinterStatus() {
     });
  
     var unreach = true;
-    request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
+    request({"rejectUnauthorized": false, "url": link, "method": "GET"}, async function(error, response, body) {
         if (!error && response.statusCode === 200) {
         
             unreach = false;
@@ -128,7 +128,7 @@ function readPrinterStatus() {
             adapter.setState('serial', {val: serial_string, ack: true});
 
             for (var i in ink) {
-               adapter.setObjectNotExists('inks.' + ink[i].state + '.level', {
+               await adapter.setObjectNotExistsAsync('inks.' + ink[i].state + '.level', {
                     type: 'state',
                     common: {
                         name: 'Level of ' + ink[i].name,
@@ -141,7 +141,7 @@ function readPrinterStatus() {
                     native: {}
                 });
                 // create state with ink name + cartrigde
-                adapter.setObjectNotExists('inks.' + ink[i].state + '.cartridge', {
+                await adapter.setObjectNotExistsAsync('inks.' + ink[i].state + '.cartridge', {
                     type: 'state',
                     common: {
                         name: 'Cartridge name for ' + ink[i].name,

@@ -14,8 +14,12 @@
             "en": "docs/en/doc_epson_workforce_en.md",
             "de": "docs/de/doc_epson_workforce_de.md"
         },
-        "version": "0.0.3",
+        "version": "0.0.4",
         "news": {
+            "0.0.4": {
+                "en": "minor changes due to warning messages with new js-controller versions",
+                "de": "Kleinere Änderungen wegen Warnungen mit neueren js-controller Versionen"
+            },
             "0.0.3": {
                 "en": "install failure of package fixed",
                 "de": "Installationsfehler korrigiert"
@@ -47,8 +51,8 @@
         ],
         "license": "MIT",
         "readme": "https://github.com/rrov1/ioBroker.epson_workforce/blob/master/README.md",
-        "icon": "epson_stylus_px830.png",
-        "extIcon": "https://github.com/rrov1/ioBroker.epson_workforce/blob/master/admin/epson_stylus_px830.png",
+        "icon": "epson_workforce.png",
+        "extIcon": "https://github.com/rrov1/ioBroker.epson_workforce/blob/master/admin/epson_workforce.png",
         "allowInit": true,
         "type": "infrastructure",
         "config": {
