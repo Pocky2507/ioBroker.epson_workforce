@@ -13,6 +13,9 @@
 
 
 ## Changelog
+### 0.0.6 (2022-01-02)
+* (rrov1) added scanned pages counter
+
 ### 0.0.5 (2022-01-02)
 * (rrov1) removed warn message read-only state has been written without ack-flag
 
@@ -38,7 +41,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2020 rrov1
+Copyright (c) 2022 rrov1
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

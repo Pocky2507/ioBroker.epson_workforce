@@ -92,7 +92,7 @@ function readPrinterStatus() {
             unreach = false;
             var match, rx;
             // MAC ADRESSE EINLESEN
-            rx = new RegExp( /(?:MAC-Adresse|Printer Name|Adresse MAC Wi-Fi\/R.seau|Indirizzo MAC Wi-Fi\/rete|Dirección MAC de Wi-Fi\/Red|Endereço MAC de Wi-Fi\/Rede)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9:]*)<\/div>/g );
+            rx = new RegExp( /(?:MAC-Adresse|MAC Address|Adresse MAC Wi-Fi\/R.seau|Indirizzo MAC Wi-Fi\/rete|Dirección MAC de Wi-Fi\/Red|Endereço MAC de Wi-Fi\/Rede)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9:]*)<\/div>/g );
             while((match = rx.exec(body)) != null) {
                 var mac_string = match[1];
             }
@@ -122,6 +122,7 @@ function readPrinterStatus() {
                         name: 'Level of ' + ink[i].name,
                         desc: 'Level of ' + ink[i].name,
                         type: 'number',
+                        role: 'value.fill',
                         unit: '%',
                         read: true,
                         write: false
@@ -135,7 +136,8 @@ function readPrinterStatus() {
                         name: 'Cartridge name for ' + ink[i].name,
                         desc: 'Cartridge name for ' + ink[i].name,
                         type: 'string',
-                        def:  '-',
+                        role: 'text',
+                        def:  'unknown',
                         read: true,
                         write: false
                     },
@@ -199,7 +201,7 @@ function readPrinterNetwork() {
             adapter.log.debug('model_string: ' + model_string);
             adapter.setState('model', {val: model_string, ack: true});
             
-            adapter.log.debug('Channels and states created/read');
+            adapter.log.debug('states updated');
             
         } else {
             adapter.log.warn('Cannot connect to Printer: ' + error);
@@ -232,16 +234,36 @@ function readPrinterMaintenance() {
             adapter.setState('first_print_date', {val: first_print_string, ack: true});
             
             // GESAMTZAHL SEITEN
-            rx = new RegExp( /(?:Gesamtanzahl Seiten)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d*)<\/div>/g );
+            rx = new RegExp( /(?:Total Number of Pages|Gesamtanzahl Seiten)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d*)<\/div>/g );
             while((match = rx.exec(body)) != null) {
-                var printed_pages_string = match[1];
+                var pages_string = match[1];
             }
-            adapter.log.debug('printed_pages_string: ' + printed_pages_string);
-            var page_count = parseInt(printed_pages_string, 10);
+            adapter.log.debug('pages_string: ' + pages_string);
+            var page_count = parseInt(pages_string, 10);
             adapter.log.debug('page_count: ' + page_count);
             adapter.setState('page_count', {val: page_count, ack: true});
             
-            adapter.log.debug('Channels and states created/read');
+            // GESAMTZAHL SEITEN: S&W SCAN
+            rx = new RegExp( /(?:W-Scan)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var pages_string = match[1];
+            }
+            adapter.log.debug('b&w scanned pages string: ' + pages_string);
+            var page_count = parseInt(pages_string, 10);
+            adapter.log.debug('b&w scanned page_count: ' + page_count);
+            adapter.setState('scan_count_bw', {val: page_count, ack: true});
+
+            // GESAMTZAHL SEITEN: FARBE SCAN
+            rx = new RegExp( /(?:Color Scan|Farbe-Scan)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d*)<\/div>/g );
+            while((match = rx.exec(body)) != null) {
+                var pages_string = match[1];
+            }
+            adapter.log.debug('color scanned pages string: ' + pages_string);
+            var page_count = parseInt(pages_string, 10);
+            adapter.log.debug('color scanned page_count: ' + page_count);
+            adapter.setState('scan_count_color', {val: page_count, ack: true});
+
+            adapter.log.debug('states updated');
         } else {
             adapter.log.warn('Cannot connect to Printer: ' + error);
             unreach = true;

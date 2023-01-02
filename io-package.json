@@ -14,8 +14,12 @@
             "en": "docs/en/doc_epson_workforce_en.md",
             "de": "docs/de/doc_epson_workforce_de.md"
         },
-        "version": "0.0.5",
+        "version": "0.0.6",
         "news": {
+            "0.0.6": {
+                "en": "added scanned pages counter",
+                "de": "Zähler für gescannte Seiten ergänzt"
+            },
             "0.0.5": {
                 "en": "removed warn message: read-only state has been written without ack-flag",
                 "de": "Warnmeldung: read-only state has been written without ack-flag entfernt"
@@ -75,20 +79,66 @@
     "instanceObjects": [
         {
             "_id": "inks",
-            "type": "channel",
+            "type": "folder",
             "common": {
-                "role": "",
-                "name": "Different inks of printer"
+                "name": "inks",
+                "desc": "Different inks of printer"
             },
             "native": {}
         },
         {
+            "_id": "inks.black",
+            "type": "channel",
+            "common": {
+                "name": "black",
+                "desc": "Channel for black color"
+            },
+            "native": {}
+        },
+        {
+            "_id": "inks.cyan",
+            "type": "channel",
+            "common": {
+                "name": "cyan",
+                "desc": "Channel for cyan color"
+            },
+            "native": {}
+        },
+        {
+            "_id": "inks.magenta",
+            "type": "channel",
+            "common": {
+                "name": "magenta",
+                "desc": "Channel for magenta color"
+            },
+            "native": {}
+        },
+        {
+            "_id": "inks.yellow",
+            "type": "channel",
+            "common": {
+                "name": "yellow",
+                "desc": "Channel for yellow color"
+            },
+            "native": {}
+        },
+        {
+            "_id": "inks.waste",
+            "type": "channel",
+            "common": {
+                "name": "waste",
+                "desc": "Channel for waste collector state"
+            },
+            "native": {}
+        },{
             "_id": "ip",
             "type": "state",
             "common": {
                 "name": "Printer IP",
                 "desc": "Printer IP adress",
                 "type": "string",
+                "def": "unknown",
+                "role": "info.ip",
                 "read": true,
                 "write": false
             },
@@ -101,6 +151,8 @@
                 "name": "Printer MAC",
                 "desc": "Printer MAC adress",
                 "type": "string",
+                "role": "info.mac",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -113,6 +165,8 @@
                 "name": "Printer Model",
                 "desc": "Printer model type",
                 "type": "string",
+                "role": "text",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -125,6 +179,8 @@
                 "name": "Printer Name",
                 "desc": "Printer Name",
                 "type": "string",
+                "role": "text",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -137,6 +193,7 @@
                 "name": "Printer not connected",
                 "desc": "is printer unreachable or not",
                 "type": "boolean",
+                "role": "indicator.reachable",
                 "def": true,
                 "read": true,
                 "write": false
@@ -150,6 +207,8 @@
                 "name": "Printer Firmware",
                 "desc": "Printer firmware version",
                 "type": "string",
+                "role": "info.firmware",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -162,6 +221,8 @@
                 "name": "Printer Serial Number",
                 "desc": "Printer Serial Number",
                 "type": "string",
+                "role": "info.serial",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -174,6 +235,8 @@
                 "name": "Printer First Print Date",
                 "desc": "Printer First Print Date",
                 "type": "string",
+                "role": "text",
+                "def": "unknown",
                 "read": true,
                 "write": false
             },
@@ -186,6 +249,36 @@
                 "name": "Printed Pages Count",
                 "desc": "Printed Pages Count",
                 "type": "number",
+                "role": "value",
+                "def": 0,
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "scan_count_bw",
+            "type": "state",
+            "common": {
+                "name": "scan_count_bw",
+                "desc": "Black&White scanned pages counter",
+                "type": "number",
+                "role": "value",
+                "def": 0,
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "scan_count_color",
+            "type": "state",
+            "common": {
+                "name": "scan_count_color",
+                "desc": "Color scanned pages counter",
+                "type": "number",
+                "role": "value",
+                "def": 0,
                 "read": true,
                 "write": false
             },
