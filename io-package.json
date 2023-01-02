@@ -14,8 +14,12 @@
             "en": "docs/en/doc_epson_workforce_en.md",
             "de": "docs/de/doc_epson_workforce_de.md"
         },
-        "version": "0.0.4",
+        "version": "0.0.5",
         "news": {
+            "0.0.5": {
+                "en": "removed warn message: read-only state has been written without ack-flag",
+                "de": "Warnmeldung: read-only state has been written without ack-flag entfernt"
+            },
             "0.0.4": {
                 "en": "minor changes due to warning messages with new js-controller versions",
                 "de": "Kleinere Änderungen wegen Warnungen mit neueren js-controller Versionen"

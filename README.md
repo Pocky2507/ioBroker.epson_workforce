@@ -13,6 +13,9 @@
 
 
 ## Changelog
+### 0.0.5 (2022-01-02)
+* (rrov1) removed warn message read-only state has been written without ack-flag
+
 ### 0.0.4 (2020-09-06)
 * (rrov1) minor changes due to warning messages with new js-controller versions
 

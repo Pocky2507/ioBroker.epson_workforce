@@ -84,24 +84,12 @@ function readSettings() {
 }
 
 function readPrinterStatus() {
-
     var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_PRTINFO/TOP';
- 
-    adapter.setState('ip', {
-        val: ip,
-        ack: false
-    });
- 
     var unreach = true;
+
     request({"rejectUnauthorized": false, "url": link, "method": "GET"}, async function(error, response, body) {
         if (!error && response.statusCode === 200) {
-        
             unreach = false;
-            adapter.setState('ip', {
-                val: ip,
-                ack: true
-            });
-            
             var match, rx;
             // MAC ADRESSE EINLESEN
             rx = new RegExp( /(?:MAC-Adresse|Printer Name|Adresse MAC Wi-Fi\/R.seau|Indirizzo MAC Wi-Fi\/rete|Dirección MAC de Wi-Fi\/Red|Endereço MAC de Wi-Fi\/Rede)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9:]*)<\/div>/g );
@@ -181,33 +169,19 @@ function readPrinterStatus() {
             unreach = true;
         }
         // Write connection status
-        adapter.setState('UNREACH', {
-            val: unreach,
-            ack: true
-        });
+        adapter.setState('UNREACH', {val: unreach, ack: true});
     }); // End request 
     adapter.log.debug('finished reading printer status data');
 }
 
 function readPrinterNetwork() {
-
     var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_NWINFO/TOP';
- 
-    adapter.setState('ip', {
-        val: ip,
-        ack: false
-    });
- 
     var unreach = true;
+    adapter.setState('ip', {val: ip, ack: true});
+
     request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
         if (!error && response.statusCode === 200) {
-        
             unreach = false;
-            adapter.setState('ip', {
-                val: ip,
-                ack: true
-            });
-            
             var match, rx;
             // NAME EINLESEN
             rx = new RegExp( /(?:Druckername|Printer Name|Nom de l\'imprimante|Nome stampante|Nombre de la impresora|Nome da impressora)&nbsp;:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">([a-zA-Z0-9 äöüÄÖÜ\-\_]*)<\/div>/g );
@@ -232,10 +206,7 @@ function readPrinterNetwork() {
             unreach = true;
         }
         // Write connection status
-        adapter.setState('UNREACH', {
-            val: unreach,
-            ack: true
-        });
+        adapter.setState('UNREACH', {val: unreach, ack: true});
     }); // End request 
     adapter.log.debug('finished reading printer network data');
 }
@@ -244,22 +215,14 @@ function readPrinterMaintenance() {
 
     var link = 'http://' + ip + '/PRESENTATION/ADVANCED/INFO_MENTINFO/TOP';
  
-    adapter.setState('ip', {
-        val: ip,
-        ack: false
-    });
+    adapter.setState('ip', {val: ip, ack: true});
  
     var unreach = true;
     request({"rejectUnauthorized": false, "url": link, "method": "GET"}, function(error, response, body) {
         if (!error && response.statusCode === 200) {
-        
             unreach = false;
-            adapter.setState('ip', {
-                val: ip,
-                ack: true
-            });
-            
             var match, rx;
+
             // ERSTDRUCKDATUM EINLESEN
             rx = new RegExp( /(?:Erstdruckdatum|First Printing Date|Date de première impression|Data prima stampa|Primera fecha de impresión|Data da primeira impressão)&nbsp;\:<\/span><\/dt><dd class=\"value clearfix\"><div class=\"preserve-white-space\">(\d\d\-\d\d\-\d\d\d\d)<\/div>/g );
             while((match = rx.exec(body)) != null) {
@@ -277,19 +240,14 @@ function readPrinterMaintenance() {
             var page_count = parseInt(printed_pages_string, 10);
             adapter.log.debug('page_count: ' + page_count);
             adapter.setState('page_count', {val: page_count, ack: true});
-
-
-            adapter.log.debug('Channels and states created/read');
             
+            adapter.log.debug('Channels and states created/read');
         } else {
             adapter.log.warn('Cannot connect to Printer: ' + error);
             unreach = true;
         }
         // Write connection status
-        adapter.setState('UNREACH', {
-            val: unreach,
-            ack: true
-        });
+        adapter.setState('UNREACH', {val: unreach, ack: true});
     }); // End request 
     adapter.log.debug('finished reading printer maintenance data');
 }
