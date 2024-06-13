@@ -41,6 +41,6 @@
     "test": "node node_modules/mocha/bin/mocha --exit"
   },
   "maintainers": [
-    "rrov1"
+    "rrov1-Pocky"
   ]
 }
