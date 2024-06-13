@@ -19,18 +19,15 @@ var sync = 180;
 //    useFormatDate: true,
     
 adapter.on('unload', function (callback) {
-    try {
-        adapter.log.info('terminating epson printer adapter');
-        stopReadPrinter();
-//        for (let j = 0; j < devArray.length; j++) {
-//            stopReadPrinter(devArray[j]);
-//        }
-        callback();
-    } catch (e) {
-        callback();
-    }
-});
-//    },
+        try {
+            adapter.log.info('terminating epson printer adapter');
+            stopReadPrinter();
+            callback();
+        } catch (e) {
+            callback();
+        }
+    },
+           
 adapter.on('ready', function () {
     init();
 });
