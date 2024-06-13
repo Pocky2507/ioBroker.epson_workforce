@@ -1,8 +1,8 @@
 {
   "name": "iobroker.epson_workforce",
   "description": "Ink status of Epson Workforce printers",
-  "version": "0.0.6",
-  "author": "rrov1",
+  "version": "0.0.7",
+  "author": "rrov1-Pocky",
   "contributors": [
     "rrov1"
   ],
