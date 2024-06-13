@@ -29,7 +29,8 @@ adapter.on('unload', function (callback) {
 });
 
 adapter.on('ready', function () {
-    init();
+    adapter.log.debug('initializing objects');
+    main();
 });
 
 var ink = {
