@@ -13,7 +13,7 @@ var baselevel = 50; // bedeutet: in der Webseite wird ein Balken von 100% Höhe 
                     // Also entspricht ein gezeigtes Tintenlevel von 25 (px) dann 50% und eines von 10 (px) dann 20%
 var sync = 180;
 
-//var adapter = utils.Adapter({
+var adapter = utils.Adapter({
 //    name: 'epson_workforce',
 //    systemConfig: true,
 //    useFormatDate: true,
