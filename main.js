@@ -3,6 +3,8 @@
 
 "use strict";
 var utils = require('@iobroker/adapter-core'); // Get common adapter utils
+var adapter = utils.Adapter('epson_workforce');
+var configChanged = false;
 var request = require('request');
 var lang = 'de';
 var callReadPrinter;
