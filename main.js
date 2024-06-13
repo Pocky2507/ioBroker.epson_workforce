@@ -30,7 +30,7 @@ adapter.on('unload', function (callback) {
         callback();
     }
 });
-    },
+//    },
 adapter.on('ready', function () {
     init();
 });
