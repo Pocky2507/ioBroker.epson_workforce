@@ -2,8 +2,8 @@
 /*jslint node: true */
 
 "use strict";
-//var utils = require('@iobroker/adapter-core'); // Get common adapter utils
-//var adapter = utils.Adapter('epson_workforce');
+var utils = require('@iobroker/adapter-core'); // Get common adapter utils
+var adapter = utils.Adapter('epson_workforce');
 //var configChanged = false;
 var request = require('request');
 var lang = 'de';
@@ -13,26 +13,27 @@ var baselevel = 50; // bedeutet: in der Webseite wird ein Balken von 100% Höhe 
                     // Also entspricht ein gezeigtes Tintenlevel von 25 (px) dann 50% und eines von 10 (px) dann 20%
 var sync = 180;
 
-var adapter = utils.Adapter({
-    name: 'epson_workforce',
-    systemConfig: true,
-    useFormatDate: true,
+//var adapter = utils.Adapter({
+//    name: 'epson_workforce',
+//    systemConfig: true,
+//    useFormatDate: true,
     
-    unload: function(callback) {
-        try {
-            adapter.log.info('terminating epson printer adapter');
-            stopReadPrinter();
-            callback();
-        } catch (e) {
-            callback();
+adapter.on('unload', function (callback) {
+    try {
+        adapter.log.info('terminating epson printer adapter');
+        stopReadPrinter();
+        for (let j = 0; j < devArray.length; j++) {
+            stopServer(devArray[j]);
         }
-    },
-    ready: function() {
-        adapter.log.debug('initializing objects');
-        main();
+        callback();
+    } catch (e) {
+        callback();
     }
 });
-
+    },
+adapter.on('ready', function () {
+    init();
+});
 
 var ink = {
     'cyan' : {
