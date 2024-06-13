@@ -22,9 +22,9 @@ adapter.on('unload', function (callback) {
     try {
         adapter.log.info('terminating epson printer adapter');
         stopReadPrinter();
-        for (let j = 0; j < devArray.length; j++) {
-            stopServer(devArray[j]);
-        }
+//        for (let j = 0; j < devArray.length; j++) {
+//            stopReadPrinter(devArray[j]);
+//        }
         callback();
     } catch (e) {
         callback();
